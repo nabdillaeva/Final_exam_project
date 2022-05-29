@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update a Company</title>
+</head>
+<body>
+<form action="#" th:method="PATCH" th:action="@{/api/companies/{id}(id=${companyUpdate.getId()})}" th:object="${companyUpdate}">
+    <label for="companyName">Enter name:</label>
+    <!--/*@thymesVar id="companyName" type="crud_lms.models.Company"*/-->
+    <input type="text" th:field="${companyUpdate.companyName}" id="companyName"/>
+    <br/>
+    <label for="locatedCountry">Enter location: </label>
+    <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
+    <input type="text" th:field="${companyUpdate.locatedCountry}" id="locatedCountry"/>
+    <br/>
+    <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

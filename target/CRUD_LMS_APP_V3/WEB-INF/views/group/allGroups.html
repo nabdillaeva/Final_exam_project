@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Groups</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width:50%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+<div style="background-color: lightblue" >
+    <h1 style="text-align: center">CRUD LMS APPLICATION</h1>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Group Id </th>
+        <th>Group Name</th>
+        <th>Date of Start</th>
+        <th>Date of Finish</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="group : ${groupList}">
+        <td th:text="${group.getId()}"></td>
+        <td th:text="${group.getGroupName()}"></td>
+        <td th:text="${group.getDateOfStart()}"></td>
+        <td th:text="${group.getDateOfFinish()}"></td>
+        <td>
+            <a th:href="@{/api/groups/{id}/update(id=${group.getId()})}">update</a>
+        </td>
+        <td>
+            <form th:method="DELETE" th:action="@{/api/groups/{id}(id=${group.getId()})}">
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a th:href="@{/api/groups/save}">
+        <button class="button">Add new Group</button>
+    </a>
+</div>
+<div>
+    <a th:href="@{/api/courses}">
+        <button class="button">All Courses</button>
+    </a>
+</div>
+<div>
+    <a th:href="@{/api/companies}">
+        <button>Main Page</button>
+    </a>
+</div>
+</body>
+</html>

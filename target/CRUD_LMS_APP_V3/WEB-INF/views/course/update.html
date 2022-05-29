@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update a Company</title>
+</head>
+<body>
+<form action="#" th:method="PATCH" th:action="@{/api/courses/{id}(id=${courseUpdate.getId()})}" th:object="${courseUpdate}">
+  <label for="courseName">Enter name:</label>
+
+  <input type="text" th:field="${courseUpdate.courseName}" id="courseName"/>
+  <br/>
+  <label for="duration">Enter duration: </label>
+
+  <input type="text" th:field="${courseUpdate.duration}" id="duration"/>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

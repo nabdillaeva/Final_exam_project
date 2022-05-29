@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Save new Company</title>
+</head>
+<body>
+<!--/*@thymesVar id="emptyCompany" type="crud_lms"*/-->
+<form action="#"
+      th:action="@{/api/groups/save}"
+      method="post"
+      th:object="${emptyGroup}">
+
+  <label for="companyName">Group Name</label>
+  <!--/*@thymesVar id="companyName" type="crud_lms.models.Company"*/-->
+  <input id="companyName" th:field="${emptyGroup.groupName}" placeholder="groupName">
+  <br><br>
+
+  <label for="dateOfStart">Date of Start</label>
+  <input id="dateOfStart" th:field="${emptyGroup.dateOfStart}" placeholder="dateOfStart">
+  <br><br>
+
+  <label for="dateOfFinish">Date of Finish</label>
+  <input id="dateOfFinish" th:field="${emptyGroup.dateOfFinish}" placeholder="dateOfFinish">
+  <br><br>
+
+
+
+  <button type="submit">save group</button>
+</form>
+
+<div>
+  <a th:href="@{/api/groups}">
+    <button>go back</button>
+  </a>
+</div>
+
+
+</body>
+</html>

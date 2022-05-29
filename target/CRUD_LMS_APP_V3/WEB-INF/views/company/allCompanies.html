@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Companies</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width:50%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color: lightblue" >
+        <h1 style="text-align: center">CRUD LMS APPLICATION</h1>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Company_Id</th>
+                <th>Company_Name</th>
+                <th>LocatedCountry</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="company : ${companyList}">
+                <td th:text="${company.getId()}"></td>
+                <td th:text="${company.getCompanyName()}"></td>
+                <td th:text="${company.getLocatedCountry()}"></td>
+                <td>
+                    <a th:href="@{/api/companies/{id}/update(id=${company.getId()})}">update</a>
+                </td>
+                <td>
+                    <!--/*@thymesVar id="getId" type="crud_lms.models.Company"*/-->
+                   <!-- <a th:href="@{/api/companies/delete/{id}(id=${company.getId()})}">delete</a>-->
+                    <form th:method="DELETE" th:action="@{/api/companies/{id}(id=${company.getId()})}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <a th:href="@{/api/companies/save}">
+            <button class="button">Add new Company</button>
+        </a>
+    </div>
+    <div>
+        <a th:href="@{/api/courses}">
+            <button class="button">All Courses</button>
+        </a>
+    </div>
+    <div>
+        <a th:href="@{/api/groups}">
+            <button class="button">All Groups</button>
+        </a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update a Group</title>
+</head>
+<body>
+<form action="#" th:method="PATCH" th:action="@{/api/groups/{id}(id=${groupUpdate.getId()})}" th:object="${groupUpdate}">
+  <label for="groupName">Enter name:</label>
+
+  <input type="text" th:field="${groupUpdate.groupName}" id="groupName"/>
+  <br/>
+  <label for="dateOfStart">Enter location: </label>
+  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
+  <input type="text" th:field="${groupUpdate.dateOfStart}" id="dateOfStart"/>
+  <br/>
+  <label for="dateOfFinish">Enter location: </label>
+  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
+  <input type="text" th:field="${groupUpdate.dateOfFinish}" id="dateOfFinish"/>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>
