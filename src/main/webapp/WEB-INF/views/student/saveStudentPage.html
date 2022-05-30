@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Save new Student</title>
+</head>
+<body>
+<!--/*@thymesVar id="emptyCompany" type="crud_lms"*/-->
+<form action="#"
+      th:action="@{/api/students/save}"
+      method="post"
+      th:object="${emptyStudent}">
+
+    <label for="firstName">FirstName</label>
+    <!--/*@thymesVar id="companyName" type="crud_lms.models.Company"*/-->
+    <input id="firstName" th:field="${emptyStudent.firstName}" placeholder="firstName">
+    <br><br>
+
+    <label for="lastName">LastName</label>
+    <!--/*@thymesVar id="companyName" type="crud_lms.models.Company"*/-->
+    <input id="lastName" th:field="${emptyStudent.lastName}" placeholder="lastName">
+    <br><br>
+
+    <label for="email">Email</label>
+    <input id="email" th:field="${emptyStudent.email}" placeholder="email">
+    <br><br>
+
+    <label for="studyFormat">Study Format</label>
+    <input id="studyFormat" th:field="${emptyStudent.studyFormat}" placeholder="studyFormat">
+    <br><br>
+
+    <label >Choose a group</label>
+    <select th:field="*{groupId}">
+        <option th:each="group:${groupList}"
+                th:value="${group.getId()}"
+                th:text="${group.groupName}">
+        </option>
+    </select>
+    <br><br>
+
+
+    <button type="submit">save student</button>
+</form>
+
+<div>
+    <a th:href="@{/api/students}">
+        <button>go back</button>
+    </a>
+</div>
+
+
+</body>
+</html>

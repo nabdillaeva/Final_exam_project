@@ -1,6 +1,7 @@
 package crud_lms.repositories;
 
 import crud_lms.models.Company;
+import crud_lms.models.Student;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,11 +21,8 @@ public class CompanyRepository {
     }
 
     public void saveCompany(Company company) {
-
         entityManager.getTransaction().begin();
-
         entityManager.persist(company);
-
         entityManager.getTransaction().commit();
     }
 
@@ -52,7 +50,6 @@ public class CompanyRepository {
 
         entityManager.getTransaction().begin();
 
-        // Company company1 = entityManager.find(Company.class, companyId);
         Company company1 = show(companyId);
 
         company1.setCompanyName(company.getCompanyName());
@@ -92,5 +89,21 @@ public class CompanyRepository {
         entityManager.getTransaction().commit();
     }
 
+//    public List<Student> findStudentByCompany(Long companyId){
+//
+//        entityManager.getTransaction().begin();
+//
+//        List<Student> students = entityManager.createQuery("select st from Student st join Group g on st.group_id = g.id join g"
+//
+//
+//        entityManager.getTransaction().commit();
 
+
+
+//    select s
+//    from students s
+//    join groups g on s.group_id = g.id
+//    join groups_courses gc on g.id = gc.groups_id
+//    join courses c on c.id = gc.courses_id
+//    join companies c2 on c2.id = c.company_id where c2.id = 5;
 }

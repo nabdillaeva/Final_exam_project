@@ -26,7 +26,10 @@ public class Student {
 
     private StudyFormat studyFormat;
 
-    @ManyToOne
+    @Transient
+    private long groupId;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Group group;
 
     public Student(String firstName, String lastName, String email, StudyFormat studyFormat) {

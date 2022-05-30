@@ -15,7 +15,6 @@ public class GroupController {
 
     private final GroupService groupService;
 
-
     public GroupController(GroupService groupService) {
         this.groupService = groupService;
     }
@@ -32,32 +31,25 @@ public class GroupController {
 
     @GetMapping("/save")
     public String saveGroupPage(Model model){
-
         model.addAttribute("emptyGroup", new Group());
-
         return "group/saveGroupPage";
     }
 
     @PostMapping("/save")
     public String saveCompany(Group group){
-
         groupService.saveGroup(group);
-
         return "redirect:/api/groups";
     }
 
     @GetMapping("/{id}/update")
     public String updateCompany(Model model, @PathVariable("id") long id){
-
         model.addAttribute("groupUpdate",groupService.show(id));
-
         return "group/update";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("groupUpdate") Group group,
                          @PathVariable("id") long id) {
-
         groupService.update(group,id);
         return "redirect:/api/groups";
     }

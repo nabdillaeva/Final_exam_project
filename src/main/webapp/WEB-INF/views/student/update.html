@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update a Student</title>
+</head>
+<body>
+<form action="#" th:method="PATCH" th:action="@{/api/students/{id}(id=${studentUpdate.getId()})}" th:object="${studentUpdate}">
+  <label for="firstName">Enter firstName:</label>
+
+  <input type="text" th:field="${studentUpdate.firstName}" id="firstName"/>
+  <br/>
+  <label for="lastName">Enter lastName: </label>
+  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
+  <input type="text" th:field="${studentUpdate.lastName}" id="lastName"/>
+  <br/>
+  <label for="email">Enter Email: </label>
+  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
+  <input type="text" th:field="${studentUpdate.email}" id="email"/>
+  <br/>
+  <br/>
+  <label for="studyFormat">Enter StudyFormat: </label>
+  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
+  <input type="text" th:field="${studentUpdate.studyFormat}" id="studyFormat"/>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+
+</body>
+</html>

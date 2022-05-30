@@ -1,6 +1,8 @@
 package crud_lms.services;
 
+import crud_lms.models.Group;
 import crud_lms.models.Student;
+import crud_lms.repositories.GroupRepository;
 import crud_lms.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +12,25 @@ import java.util.List;
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final GroupRepository groupRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, GroupRepository groupRepository) {
         this.studentRepository = studentRepository;
+        this.groupRepository = groupRepository;
     }
 
 
-    public void saveStudent(Student student){
-        studentRepository.saveStudent(student);
+    public void saveStudent(Student student,long groupId){
+
+        Group group1 = groupRepository.findById(groupId);
+
+//        Group group = groupRepository.findById(groupId).orElseThrow(()->new IllegalStateException(
+//                "group with id  = " + groupId + "not found!"
+//        ));
+
+        group1.setStudent(student);
+        student.setGroup(group1);
+
     }
 
     public List<Student> findAllStudents(){

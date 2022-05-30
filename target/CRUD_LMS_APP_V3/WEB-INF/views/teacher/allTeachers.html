@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Groups</title>
+    <title>Teachers</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -42,25 +42,25 @@
 <table>
     <thead>
     <tr>
-        <th>Group Id </th>
-        <th>Group Name</th>
-        <th>Date of Start</th>
-        <th>Date of Finish</th>
+        <th>Teacher Id </th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Email</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="group : ${groupList}">
-        <td th:text="${group.getId()}"></td>
-        <td th:text="${group.getGroupName()}"></td>
-        <td th:text="${group.getDateOfStart()}"></td>
-        <td th:text="${group.getDateOfFinish()}"></td>
+    <tr th:each="teacher : ${teacherList}">
+        <td th:text="${teacher.getId()}"></td>
+        <td th:text="${teacher.getFirstName()}"></td>
+        <td th:text="${teacher.getLastName()}"></td>
+        <td th:text="${teacher.getEmail()}"></td>
         <td>
-            <a th:href="@{/api/groups/{id}/update(id=${group.getId()})}">update</a>
+            <a th:href="@{/api/teachers/{id}/update(id=${teacher.getId()})}">update</a>
         </td>
         <td>
-            <form th:method="DELETE" th:action="@{/api/groups/{id}(id=${group.getId()})}">
+            <form th:method="DELETE" th:action="@{/api/teachers/{id}(id=${teacher.getId()})}">
                 <input type="submit" value="Delete">
             </form>
         </td>
@@ -69,13 +69,8 @@
 </table>
 
 <div>
-    <a th:href="@{/api/groups/save}">
-        <button class="button">Add new Group</button>
-    </a>
-</div>
-<div>
-    <a th:href="@{/api/students}">
-        <button class="button">All Students</button>
+    <a th:href="@{/api/teachers/save}">
+        <button class="button">Add new Teacher</button>
     </a>
 </div>
 <div>

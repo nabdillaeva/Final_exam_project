@@ -26,7 +26,6 @@ public class CourseController {
     @ModelAttribute("courseList")
     public List<Course> findAllCourses(){
         return courseService.findAllCourses();
-
     }
 
     @ModelAttribute("companyList")
@@ -41,33 +40,25 @@ public class CourseController {
 
     @GetMapping("/save")
     public String saveCoursePage(Model model){
-
         model.addAttribute("emptyCourse", new Course());
-
         return "course/saveCoursePage";
     }
 
     @PostMapping("/save")
     public String saveCourse(Course course){
-//        long companyId = course.getCompany().getId();
-
         courseService.saveCourse(course, course.getCompanyId());
-
         return "redirect:/api/courses";
     }
 
     @GetMapping("/{id}/update")
     public String updateCourse(Model model, @PathVariable("id") long id){
-
         model.addAttribute("courseUpdate",courseService.show(id));
-
         return "course/update";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("courseUpdate") Course course,
                          @PathVariable("id") long id) {
-
         courseService.update(course,id);
         return "redirect:/api/courses";
     }

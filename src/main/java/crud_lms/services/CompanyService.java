@@ -1,6 +1,7 @@
 package crud_lms.services;
 
 import crud_lms.models.Company;
+import crud_lms.models.Student;
 import crud_lms.repositories.CompanyRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,11 @@ import java.util.List;
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final StudentService studentService;
 
-    public CompanyService(CompanyRepository companyRepository){
+    public CompanyService(CompanyRepository companyRepository, StudentService studentService){
         this.companyRepository = companyRepository;
+        this.studentService = studentService;
     }
 
     public void saveCompany(Company company){
@@ -43,4 +46,11 @@ public class CompanyService {
     public void deleteById(long id){
         companyRepository.deleteById(id);
     }
+
+//    public List<Student> findStudentByCompany(Long companyId){
+//        List<Student> studentList = studentService.findAllStudents();
+////        studentList.stream().filter(student -> student.getGroup().)
+//        return studentList;
+//
+//    }
 }
