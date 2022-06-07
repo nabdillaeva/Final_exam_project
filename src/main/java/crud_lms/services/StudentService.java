@@ -7,6 +7,7 @@ import crud_lms.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -54,4 +55,10 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
+    public List<Student> findStudentsByName(String studentName) {
+        return studentRepository.findStudentByName(studentName);
+    }
+    public List<Student> sizeOfStudents(Long companyId){
+        return studentRepository.sizeOfStudents(companyId);
+    }
 }

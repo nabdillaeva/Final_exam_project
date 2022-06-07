@@ -51,7 +51,6 @@ public class CourseRepository {
 
         entityManager.getTransaction().begin();
 
-        // Company company1 = entityManager.find(Company.class, companyId);
         Course course1 = show(courseId);
 
         course1.setCourseName(course.getCourseName());
@@ -62,11 +61,11 @@ public class CourseRepository {
 
     }
 
-    public void mergeCourse(Course company){
+    public void mergeCourse(Course course){
 
         entityManager.getTransaction().begin();
 
-        entityManager.merge(company);
+        entityManager.merge(course);
 
         entityManager.getTransaction().commit();
     }
@@ -91,4 +90,13 @@ public class CourseRepository {
         entityManager.getTransaction().commit();
     }
 
+    public List<Course> findByCompanyId(Long companyId) {
+        entityManager.getTransaction().begin();
+
+        List<Course> resultList = entityManager.createQuery("select c from Course c where c.company = (select com from Company com where com.id = ?1)", Course.class)
+                .setParameter(1, companyId)
+                .getResultList();
+        entityManager.getTransaction().commit();
+        return resultList;
+    }
 }

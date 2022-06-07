@@ -4,34 +4,188 @@
 <head>
     <meta charset="UTF-8">
     <title>Save new Teacher</title>
+
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            margin:0;
+            padding:0;
+            font-family: sans-serif;
+            background: linear-gradient(#141e30, #243b55);
+        }
+
+        .login-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 500px;
+            padding: 40px;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,.5);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0,0,0,.6);
+            border-radius: 10px;
+        }
+
+        .login-box h2 {
+            margin: 0 0 30px;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .login-box .user-box {
+            position: relative;
+        }
+
+        .login-box .user-box input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 10px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+        .login-box .user-box input:focus ~ label,
+        .login-box .user-box input:valid ~ label {
+            top: -100px;
+            left: 0;
+            color: #03e9f4;
+            font-size: 12px;
+        }
+
+        .login-box form a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            color: #03e9f4;
+            font-size: 16px;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            transition: .5s;
+            margin-top: 40px;
+            letter-spacing: 4px
+        }
+        .login-box .user-box select{
+            margin-top: 20px;
+            width: 150px;
+            height: 80px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .login-box label{
+            color: #ffffff;
+            font-size: 15px;
+        }
+        .login-box button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #a564ea;
+            border-radius: 8px;
+            margin-left: 150px;
+            width: 200px;
+        }
+
+        .back-button button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            cursor: pointer;
+            background-color: cornflowerblue;
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-left: 210px ;
+            width: 100px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
-<!--/*@thymesVar id="emptyCompany" type="crud_lms"*/-->
-<form action="#"
-      th:action="@{/api/teachers/save}"
-      method="post"
-      th:object="${emptyTeacher}">
 
-    <label for="firstName">FirstName</label>
-    <input id="firstName" th:field="${emptyTeacher.firstName}" placeholder="firstName">
-    <br><br>
-
-    <label for="lastName">LastName</label>
-    <input id="lastName" th:field="${emptyTeacher.lastName}" placeholder="lastName">
-    <br><br>
-
-    <label for="email">Email</label>
-    <input id="email" th:field="${emptyTeacher.email}" placeholder="email">
-    <br><br>
-
-    <button type="submit">save teacher</button>
-</form>
-
-<div>
-    <a th:href="@{/api/teachers}">
-        <button>go back</button>
-    </a>
+<div class="login-box">
+    <h2>Save new teacher</h2>
+    <form action="#"
+          th:action="@{/api/teachers/save}"
+          method="post"
+          th:object="${emptyTeacher}">
+        <div class="user-box">
+            <input th:field="${emptyTeacher.firstName}" placeholder="First Name">
+        </div>
+        <div class="user-box">
+            <input th:field="${emptyTeacher.lastName}" placeholder="Last Name">
+        </div>
+        <div class="user-box">
+            <input th:field="${emptyTeacher.email}" placeholder="Email">
+        </div>
+        <div class="user-box">
+            <label >Choose a course</label>
+            <select th:field="*{courseId}">
+                <option th:each="course:${courseList}"
+                        th:value="${course.getId()}"
+                        th:text="${course.courseName}">
+                </option>
+            </select>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    <div class="back-button">
+        <a th:href="@{/api/teachers}">
+            <button class="button">Go Back</button>
+        </a>
+    </div>
 </div>
+<!--/*@thymesVar id="emptyCompany" type="crud_lms"*/-->
+<!--<form action="#"-->
+<!--      th:action="@{/api/teachers/save}"-->
+<!--      method="post"-->
+<!--      th:object="${emptyTeacher}">-->
+
+<!--    <label for="firstName">First Name</label>-->
+<!--    <input id="firstName" th:field="${emptyTeacher.firstName}" placeholder="firstName">-->
+<!--    <br><br>-->
+
+<!--    <label for="lastName">Last Name</label>-->
+<!--    <input id="lastName" th:field="${emptyTeacher.lastName}" placeholder="lastName">-->
+<!--    <br><br>-->
+
+<!--    <label for="email">Email</label>-->
+<!--    <input id="email" th:field="${emptyTeacher.email}" placeholder="email">-->
+<!--    <br><br>-->
+
+<!--    <label >Choose a course</label>-->
+<!--    <select th:field="*{courseId}">-->
+<!--        <option th:each="course:${courseList}"-->
+<!--                th:value="${course.getId()}"-->
+<!--                th:text="${course.courseName}">-->
+<!--        </option>-->
+<!--    </select>-->
+
+<!--    <button type="submit">save teacher</button>-->
+<!--</form>-->
+
+<!--<div>-->
+<!--    <a th:href="@{/api/teachers}">-->
+<!--        <button>go back</button>-->
+<!--    </a>-->
+<!--</div>-->
 
 
 </body>

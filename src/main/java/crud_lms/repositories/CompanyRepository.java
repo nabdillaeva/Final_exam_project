@@ -93,12 +93,16 @@ public class CompanyRepository {
 //
 //        entityManager.getTransaction().begin();
 //
-//        List<Student> students = entityManager.createQuery("select st from Student st join Group g on st.group_id = g.id join g"
+//        List<Student> students = entityManager.createQuery("select st from Student st join Group g on st.group_id = g.id join g.courses c on g.id=c.groups_id join Course cs on cs.id = cs.groups gs.courses_id join Company c2 on c2.id=c.company_id where c2.id= :id",Student.class)
+//                        .setParameter("id",companyId)
+//                                .getResultList();
 //
 //
 //        entityManager.getTransaction().commit();
-
-
+//
+//        return null;
+//
+//    }
 
 //    select s
 //    from students s

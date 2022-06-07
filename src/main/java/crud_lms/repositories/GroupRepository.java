@@ -1,6 +1,7 @@
 package crud_lms.repositories;
 
 import crud_lms.models.Group;
+import crud_lms.models.Student;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -75,5 +76,18 @@ public class GroupRepository {
         entityManager.remove(entityManager.find(Group.class,groupId));
 
         entityManager.getTransaction().commit();
+    }
+
+    public List<Student> findStudentsByName(String studentName) {
+        return entityManager.createQuery(
+                "select g from Group g where (select s from Student s where s.firstName=?1) member of g.students"
+                ,Student.class).setParameter(1,studentName).getResultList();
+
+    }
+
+    public List<Student> findAllStudents() {
+        return entityManager.createQuery(
+                "select g from Group g where (select s from Student s) member of g.students"
+                ,Student.class).getResultList();
     }
 }

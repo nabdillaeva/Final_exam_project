@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.CascadeType.MERGE;
+import static javax.persistence.CascadeType.PERSIST;
+
 @Entity
 @Table(name = "teachers")
 @NoArgsConstructor
@@ -22,8 +25,11 @@ public class Teacher {
 
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Course course;
+
+    @Transient
+    private long courseId;
 
     public Teacher(String firstName, String lastName, String email) {
         this.firstName = firstName;

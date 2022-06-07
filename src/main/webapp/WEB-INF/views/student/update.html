@@ -3,28 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <title>Update a Student</title>
+  <style>
+    html {
+      height: 100%;
+    }
+    body {
+      margin:0;
+      padding:0;
+      font-family: sans-serif;
+      background: linear-gradient(#141e30, #243b55);
+    }
+
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 600px;
+      height: 500px;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.5);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 10px;
+    }
+
+    .login-box h2 {
+      margin: 0 0 30px;
+      padding: 0;
+      color: #fff;
+      text-align: center;
+    }
+
+    .login-box .user-box {
+      position: relative;
+    }
+
+    .login-box .user-box input {
+      width: 100%;
+      padding: 10px 0;
+      font-size: 18px;
+      color: #fff;
+      margin-bottom: 10px;
+      border: none;
+      border-bottom: 1px solid #fff;
+      outline: none;
+      background: transparent;
+    }
+
+    .login-box .user-box input:focus ~ label,
+    .login-box .user-box input:valid ~ label {
+      top: -20px;
+      left: 0;
+      color: #03e9f4;
+      font-size: 12px;
+    }
+
+    .login-box form a {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #03e9f4;
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow: hidden;
+      transition: .5s;
+      margin-top: 40px;
+      letter-spacing: 4px
+    }
+
+    .login-box button {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #a564ea;
+      border-radius: 8px;
+      margin-left: 150px;
+      width: 200px;
+    }
+
+    .back-button button {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 13px;
+      cursor: pointer;
+      background-color: cornflowerblue;
+      border-radius: 8px;
+      margin-top: 20px;
+      margin-left: 200px;
+      width: 100px;
+      height: 50px;
+    }
+    .login-box .radio-button{
+      margin-bottom: 15px;
+      margin-top: 10px;
+    }
+    .login-box .radio-button label{
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
-<form action="#" th:method="PATCH" th:action="@{/api/students/{id}(id=${studentUpdate.getId()})}" th:object="${studentUpdate}">
-  <label for="firstName">Enter firstName:</label>
+<div class="login-box">
+  <h2>Update a student</h2>
+  <form action="#"
+        th:method="PATCH"
+        th:action="@{/api/students/{id}(id=${studentUpdate.getId()})}"
+        th:object="${studentUpdate}">
 
-  <input type="text" th:field="${studentUpdate.firstName}" id="firstName"/>
-  <br/>
-  <label for="lastName">Enter lastName: </label>
-  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
-  <input type="text" th:field="${studentUpdate.lastName}" id="lastName"/>
-  <br/>
-  <label for="email">Enter Email: </label>
-  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
-  <input type="text" th:field="${studentUpdate.email}" id="email"/>
-  <br/>
-  <br/>
-  <label for="studyFormat">Enter StudyFormat: </label>
-  <!--/*@thymesVar id="locatedCountry" type="crud_lms.models.Company"*/-->
-  <input type="text" th:field="${studentUpdate.studyFormat}" id="studyFormat"/>
-  <br/>
-  <input type="submit" value="Update!"/>
-</form>
+    <div class="user-box">
+      <input th:field="${studentUpdate.firstName}" placeholder="First Name">
+    </div>
+    <div class="user-box">
+      <input th:field="${studentUpdate.lastName}" placeholder="Last Name">
+    </div>
+    <div class="user-box">
+      <input th:field="${studentUpdate.email}" placeholder="Email">
+    </div>
+<!--    <div class="user-box">-->
+<!--      <input th:field="${studentUpdate.studyFormat}" placeholder="Study Format">-->
+<!--    </div>-->
+    <div class="radio-button">
+      <input type="radio" value="ONLINE" th:field="*{studyFormat}"
+             id="onlineFormat">
+      <label for="onlineFormat">ONLINE</label>
+      <input type="radio" value="OFFLINE" th:field="*{studyFormat}"
+             id="offlineFormat">
+      <label for="offlineFormat">OFFLINE</label>
+    </div>
+    <button type="submit" value="Update">Update</button>
+  </form>
+  <div class="back-button">
+    <a th:href="@{/api/students}">
+      <button class="button">Go Back</button>
+    </a>
+  </div>
+</div>
 
 </body>
 </html>

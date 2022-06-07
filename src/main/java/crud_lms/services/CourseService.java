@@ -5,8 +5,7 @@ import crud_lms.models.Course;
 import crud_lms.repositories.CompanyRepository;
 import crud_lms.repositories.CourseRepository;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,10 +21,6 @@ public class CourseService {
 
     public void saveCourse(Course course, long companyId) {
 
-        System.out.println(course);
-
-        System.out.println("there works");
-
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new IllegalStateException(
                         "company with id = " + companyId + " not found!"
@@ -40,6 +35,16 @@ public class CourseService {
         return courseRepository.findAllCourses();
     }
 
+    public List<Course> findAllCoursesNotTeacher() {
+        List<Course> coursesWithoutTeacher = new ArrayList<>();
+        List<Course> allCourses = courseRepository.findAllCourses();
+        for (Course course: allCourses) {
+            if(course.getTeacher() == null){
+                coursesWithoutTeacher.add(course);
+            }
+        }
+        return coursesWithoutTeacher;
+    }
     public Course show(long id) {
         return courseRepository.show(id);
     }
@@ -58,5 +63,10 @@ public class CourseService {
 
     public void deleteById(long id) {
         courseRepository.deleteById(id);
+    }
+
+
+    public List<Course> findByCompanyId(Long companyId) {
+       return courseRepository.findByCompanyId(companyId);
     }
 }

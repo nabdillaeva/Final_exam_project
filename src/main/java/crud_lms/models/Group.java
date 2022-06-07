@@ -24,8 +24,11 @@ public class Group {
 
     private String dateOfFinish;
 
-    @ManyToMany
-    private List<Course> courses;
+    @Transient
+    private long courseId;//list
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Course course;
 
     @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Student> students=new ArrayList<>();
@@ -34,4 +37,6 @@ public class Group {
     public void setStudent(Student student){
         this.students.add(student);
     }
+
+
 }

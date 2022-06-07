@@ -78,7 +78,7 @@ public class TeacherRepository {
 
         entityManager.getTransaction().begin();
 
-        entityManager.remove(entityManager.find(Student.class,teacherId));
+        entityManager.remove(entityManager.find(Teacher.class,teacherId));
 
         entityManager.getTransaction().commit();
     }

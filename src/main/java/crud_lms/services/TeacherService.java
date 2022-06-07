@@ -1,6 +1,9 @@
 package crud_lms.services;
 
+import crud_lms.models.Company;
+import crud_lms.models.Course;
 import crud_lms.models.Teacher;
+import crud_lms.repositories.CourseRepository;
 import crud_lms.repositories.TeacherRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,18 +13,24 @@ import java.util.List;
 public class TeacherService {
 
    private final TeacherRepository teacherRepository;
+   private final CourseRepository courseRepository;
 
-    public TeacherService(TeacherRepository teacherRepository) {
+    public TeacherService(TeacherRepository teacherRepository, CourseRepository courseRepository) {
         this.teacherRepository = teacherRepository;
+        this.courseRepository = courseRepository;
+    }
+    public void saveTeacher(Teacher teacher,long courseId){
+
+        Course course = courseRepository.findById(courseId);
+            course.setTeacher(teacher);
+            teacher.setCourse(course);
     }
 
-    public void saveTeacher(Teacher teacher){
-        teacherRepository.saveTeacher(teacher);
-    }
 
     public List<Teacher> findAllTeachers(){
         return teacherRepository.findAllTeachers();
     }
+
     public Teacher show(long id){
         return teacherRepository.show(id);
     }

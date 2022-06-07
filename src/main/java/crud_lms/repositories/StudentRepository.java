@@ -79,4 +79,27 @@ public class StudentRepository {
 
         entityManager.getTransaction().commit();
     }
+
+    public List<Student> findStudentByName(String studentName) {
+        entityManager.getTransaction().begin();
+
+        List<Student> resultList = entityManager.createQuery("select s from Student s where s.firstName=?1", Student.class)
+                .setParameter(1, studentName).getResultList();
+
+        entityManager.getTransaction().commit();
+
+        return resultList;
+    }
+
+    public List<Student> sizeOfStudents(Long companyId){
+        entityManager.getTransaction().begin();
+
+        List<Student> resultList = entityManager.createQuery("select st from Student st join Group g on g.id = st.group.id join Course c on c.id = g.course.id join Company  c2 on c2.id=c.company.id where c2.id=?1", Student.class)
+                .setParameter(1, companyId)
+                .getResultList();
+
+        entityManager.getTransaction().commit();
+        return resultList;
+
+    }
 }

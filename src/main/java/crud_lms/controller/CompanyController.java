@@ -1,6 +1,8 @@
 package crud_lms.controller;
 
 import crud_lms.models.Company;
+import crud_lms.models.Course;
+import crud_lms.models.Group;
 import crud_lms.models.Student;
 import crud_lms.services.CompanyService;
 import crud_lms.services.StudentService;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,6 +37,7 @@ public class CompanyController {
 
     @GetMapping
     public String allCompanies(){
+
         return "company/allCompanies";
     }
 
@@ -66,6 +70,23 @@ public class CompanyController {
     public String delete(@PathVariable("id") long id){
         companyService.deleteById(id);
         return "redirect:/api/companies";
+    }
+
+    @GetMapping("stud/{companyId}")
+    public String findAllStudentsOfCompany(@PathVariable("companyId") Long companyId, Model model){
+
+        List<Student> students = new ArrayList<>();
+        List<Course> courses = companyService.findById(companyId).getCourses();
+        for (Course course: courses) {
+            for (Group group : course.getGroups()) {
+                students.addAll(group.getStudents());
+            }
+        }
+
+        model.addAttribute("students",students);
+        model.addAttribute("size",students.size());
+
+        return "company/students";
     }
 
 }

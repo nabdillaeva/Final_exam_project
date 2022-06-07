@@ -6,13 +6,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "courses")
 @NoArgsConstructor
 @Getter @Setter
-@ToString
 public class Course {
 
     @Id
@@ -26,17 +26,23 @@ public class Course {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Company company;
 
-    @ManyToMany(mappedBy = "courses")
-    private List<Group> groups;
+    @OneToMany(mappedBy = "course",orphanRemoval = true)
+    private List<Group> groups = new ArrayList<>();
 
-    @OneToOne(mappedBy = "course")
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "course", orphanRemoval = true)
     private Teacher teacher;
 
     @Transient
     private Long companyId;
 
+    @Transient
+    private Long groupId;
+
     public Course(Company company) {
         this.company = company;
     }
 
+    public void setGroup(Group group) {
+        this.groups.add(group);
+    }
 }

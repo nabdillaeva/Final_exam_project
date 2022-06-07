@@ -68,4 +68,13 @@ public class CourseController {
         courseService.deleteById(id);
         return "redirect:/api/courses";
     }
+
+    @GetMapping("/find/by/{companyId}")
+    public  String findAllCoursesByCompanyId(@PathVariable Long companyId, Model model){
+       List<Course> courses = courseService.findByCompanyId(companyId);
+       model.addAttribute("courses", courses);
+       model.addAttribute("companyId", companyId);
+
+       return "company/companyCourses";
+    }
 }
